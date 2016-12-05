@@ -1,0 +1,27 @@
+docker run -t -i --name postgrest --link=postgresdb -p 3000:3000 -d robcult/postgrest 
+
+
+
+# In order to create samle config file for postgrest
+postgrest -c postgrest.config --example-config
+
+# Clean up and create postgrest-image image
+docker stop postgrest
+docker rm postgrest
+docker rmi postgrest-image
+docker build -t="postgrest-image" .
+
+
+docker run -t -i --name postgrest --link=postgresdb -p 3000:3000 -d postgrest-image 
+
+
+
+
+# In case of the need to debugging
+docker run -t -i postgrest-image /bin/bash
+docker exec -t -i postgrest /bin/bash
+
+
+
+
+

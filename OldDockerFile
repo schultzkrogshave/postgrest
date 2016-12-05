@@ -1,0 +1,23 @@
+# Install PostgREST on ubuntu server
+
+FROM centos:7
+
+RUN yum update && \
+    yum install -y sudo && \
+    curl -sSL https://download.fpcomplete.com/centos/7/fpco.repo | tee /etc/yum.repos.d/fpco.repo && \
+    yum -y install stack && \
+    yum install -y git && \
+    yum install -y pg_config 
+#    yum install -y postgresql-devel && \ 
+#    yum install -y zlib-devel && \
+#    git clone https://github.com/begriffs/postgrest.git && \
+#    cd postgrest && \
+#    stack build --install-ghc && \
+#    stack install --allow-different-user --local-bin-path /usr/local/bin && \
+#    yum clean all 
+
+# postgrest postgres://user:pass@host:port/db -a anon_user [other flags]
+# http://postgrest.com/install/server/ 
+
+EXPOSE 3000
+
